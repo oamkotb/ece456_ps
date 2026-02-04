@@ -7,6 +7,7 @@
 \usepackage{listings}
 \usepackage{matlab-prettifier}
 \usepackage{physics}
+\usepackage{siunitx}
 
 \lhead{}
 \rhead{ECE 456 Problem Set 1}
@@ -27,7 +28,7 @@
 \end{titlepage}
 
 % --------------------
-% Problem 1
+% Problem 1a
 % --------------------
 \section{Current with a Lorentzian Density of States}
 
@@ -38,7 +39,7 @@ Given the following equations for the number of channel electrons and current in
     N = \int_{-\infty}^{\infty} \frac{\gamma_1 f_1(E) + \gamma_2 f_2(E)}{\gamma_1 + \gamma_2} D(E-U) \dd{E}
 \end{equation}
 \begin{equation}
-    I = \frac{q}{\hbar}\frac{\gamma_1 \gamma_2}P{\gamma_1 + \gamma_2}\int_{-\infty}^{\infty}[f_1(E) - f_2(E)]D(E-U) \dd{E}
+    I = \frac{q}{\hbar}\frac{\gamma_1 \gamma_2}{\gamma_1 + \gamma_2}\int_{-\infty}^{\infty}[f_1(E) - f_2(E)]D(E-U) \dd{E}
 \end{equation}\\
 % Manipulation Steps
 These equations can be manipulated to be easier to code into MATLAB. Firstly, change the variable of integration to $E' = E - U$. This can be manipulated to recieve
@@ -60,9 +61,20 @@ Hence, substituting for $E = E' + U$ and replacing $E' \rightarrow E$ produces
     I = \frac{q}{\hbar}\frac{\gamma_1 \gamma_2}{\gamma_1 + \gamma_2}\int_{-\infty}^{\infty}[f_1(E+U) - f_2(E+U)]D(E) \dd{E}
 \end{equation}
 
-\subsection{}
+\subsection{Solving the Equations Self-Consistently}
 
 % --------------------
-% Problem 2
+% Problem 1b
+% --------------------
+Using the code in \verb|problem1.py| to calculate the values of $N$ and $I$ self-consistently produced the plots seen in Figure \ref{fig:1b_plots}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10cm]{imgs/1b.png}
+	\caption{Plot of the current ($I$) and number of electrons ($N$) against the drain voltage ($V_D$)}
+	\label{fig:1b_plots}
+\end{figure}
+
+% --------------------
+% Problem 1b
 % --------------------
 \end{document}
