@@ -44,7 +44,7 @@ D = np.array([(gamma / (2 * np.pi)) / ((e - cal_E) ** 2 + (gamma / 2) ** 2) for 
 
 # Normalize so that sum(D)*dE = 1
 norm = dE * sum(D)
-D = [d / norm for d in D]  # [1/eV] normalized DOS
+D = np.array([d / norm for d in D])  # [1/eV] normalized DOS
 
 # -----------------------------
 # Reference electron number (dimensionless count)
@@ -108,6 +108,207 @@ for count in range(1, NV):
 
     # Compute the current after the self-consistent potential
     I[count] = q * (q / hbar) * (gamma_1 * gamma_2) / gamma * dE * np.sum((f1 - f2) * D)
+
+    # Code to create the required plots for Problem Set 1, Problem 1(c)
+
+    # If you've used the same variable names as in the sample code, then you
+    # should be able to simply insert this into the appropriate spot in your
+    # own code; otherwise, you'll have to modify this accordingly, which
+    # should be easy to do---if disaster strikes and it doesn't work, then
+    # please ask for help
+
+    # Python code cares about how the code is indented. Make sure the code being
+    # inserted is indented consistently with respect to the code it is being
+    # inserted into.
+
+    # The "if" statement is used to choose VD values closest to the required
+    # values of 0.0, 0.2, 0.5, 0.8, and 1.0 V, and you don't need to worry
+    # about how this works
+
+    if abs(VD - 0.0) <= dV / 2:
+        plt.figure(3, figsize=(8, 6))
+
+        plt.subplot(2, 3, 1)
+        plt.plot(f1, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("f1(E+U)")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.0 V")
+
+        plt.subplot(2, 3, 2)
+        plt.plot(D / 100, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("D(E)/100")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.0 V")
+
+        plt.subplot(2, 3, 3)
+        plt.plot(f2, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("f2(E+U)")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.0 V")
+
+        plt.subplot(2, 3, 5)
+        plt.plot(f1 - f2, E, "b--", D / 100, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("f1(E+U)-f2(E+U), D(E)/100")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.0 V")
+
+        plt.subplots_adjust(wspace=0.5, hspace=0.4)
+
+    elif abs(VD - 0.2) <= dV / 2:
+        plt.figure(4, figsize=(8, 6))
+
+        plt.subplot(2, 3, 1)
+        plt.plot(f1, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("f1(E+U)")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.2 V")
+
+        plt.subplot(2, 3, 2)
+        plt.plot(D / 100, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("D(E)/100")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.2 V")
+
+        plt.subplot(2, 3, 3)
+        plt.plot(f2, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("f2(E+U)")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.2 V")
+
+        plt.subplot(2, 3, 5)
+        plt.plot(f1 - f2, E, "b--", D / 100, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("f1(E+U)-f2(E+U), D(E)/100")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.2 V")
+
+        plt.subplots_adjust(wspace=0.5, hspace=0.4)
+
+    elif abs(VD - 0.5) <= dV / 2:
+        plt.figure(5, figsize=(8, 6))
+
+        plt.subplot(2, 3, 1)
+        plt.plot(f1, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("f1(E+U)")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.5 V")
+
+        plt.subplot(2, 3, 2)
+        plt.plot(D / 100, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("D(E)/100")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.5 V")
+
+        plt.subplot(2, 3, 3)
+        plt.plot(f2, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("f2(E+U)")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.5 V")
+
+        plt.subplot(2, 3, 5)
+        plt.plot(f1 - f2, E, "b--", D / 100, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("f1(E+U)-f2(E+U), D(E)/100")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.5 V")
+
+        plt.subplots_adjust(wspace=0.5, hspace=0.4)
+
+    elif abs(VD - 0.8) <= dV / 2:
+        plt.figure(6, figsize=(8, 6))
+
+        plt.subplot(2, 3, 1)
+        plt.plot(f1, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("f1(E+U)")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.8 V")
+
+        plt.subplot(2, 3, 2)
+        plt.plot(D / 100, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("D(E)/100")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.8 V")
+
+        plt.subplot(2, 3, 3)
+        plt.plot(f2, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("f2(E+U)")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.8 V")
+
+        plt.subplot(2, 3, 5)
+        plt.plot(f1 - f2, E, "b--", D / 100, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("f1(E+U)-f2(E+U), D(E)/100")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 0.8 V")
+
+        plt.subplots_adjust(wspace=0.5, hspace=0.4)
+
+    elif abs(VD - 1.0) <= dV / 2:
+        plt.figure(7, figsize=(8, 6))
+
+        plt.subplot(2, 3, 1)
+        plt.plot(f1, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("f1(E+U)")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 1.0 V")
+
+        plt.subplot(2, 3, 2)
+        plt.plot(D / 100, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("D(E)/100")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 1.0 V")
+
+        plt.subplot(2, 3, 3)
+        plt.plot(f2, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("f2(E+U)")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 1.0 V")
+
+        plt.subplot(2, 3, 5)
+        plt.plot(f1 - f2, E, "b--", D / 100, E, "k-")
+        plt.xlim([-0.1, 1.1])
+        plt.ylim([-1, 1])
+        plt.xlabel("f1(E+U)-f2(E+U), D(E)/100")
+        plt.ylabel("ENERGY  [eV]")
+        plt.title("VD = 1.0 V")
+
+        plt.subplots_adjust(wspace=0.5, hspace=0.4)
 
 
 # Plot results

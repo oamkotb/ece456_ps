@@ -2,7 +2,7 @@
 \usepackage{amsmath}
 \usepackage{fancyhdr}
 \usepackage{float}
-\usepackage[a4paper, left=1in, right=1in, top=1in, bottom=1in]{geometry} % Adjust margins
+\usepackage[a4paper, left=1in, right=1in, top=1in, bottom=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{matlab-prettifier}
@@ -18,7 +18,8 @@
 \begin{titlepage}
     \vspace*{\fill}
     \begin{center}
-        \Huge\textbf{ECE 456 Problem Set 1:\\} The Basics of Electron Flow in Nanodevices\\
+        \Huge\textbf{ECE 456 Problem Set 1:\\}
+        The Basics of Electron Flow in Nanodevices\\
         \vspace{1cm}
         \Large Omar Mahmoud, Nasif Qadri\\
         \vspace{0.5cm}
@@ -33,32 +34,43 @@
 \section{Current with a Lorentzian Density of States}
 
 \subsection{Alternative Form}
-% Original Equations
-Given the following equations for the number of channel electrons and current in a nanodevice
+
+Given the following expressions for the number of channel electrons and the current in a nanodevice:
 \begin{equation}
-    N = \int_{-\infty}^{\infty} \frac{\gamma_1 f_1(E) + \gamma_2 f_2(E)}{\gamma_1 + \gamma_2} D(E-U) \dd{E}
+    N = \int_{-\infty}^{\infty}
+    \frac{\gamma_1 f_1(E) + \gamma_2 f_2(E)}{\gamma_1 + \gamma_2}
+    D(E-U)\, \dd{E}
 \end{equation}
 \begin{equation}
-    I = \frac{q}{\hbar}\frac{\gamma_1 \gamma_2}{\gamma_1 + \gamma_2}\int_{-\infty}^{\infty}[f_1(E) - f_2(E)]D(E-U) \dd{E}
-\end{equation}\\
-% Manipulation Steps
-These equations can be manipulated to be easier to code into MATLAB. Firstly, change the variable of integration to $E' = E - U$. This can be manipulated to recieve
+    I = \frac{q}{\hbar}
+    \frac{\gamma_1 \gamma_2}{\gamma_1 + \gamma_2}
+    \int_{-\infty}^{\infty}
+    [f_1(E) - f_2(E)] D(E-U)\, \dd{E}
+\end{equation}
+
+These expressions can be rewritten into a form that is more convenient for numerical implementation in MATLAB. First, define a change of variables:
 \begin{align*}
-	&E' = E - U\\
-	&E = E' + U\\
-	&dE' = dE
+	E' &= E - U \\
+	E &= E' + U \\
+	\dd{E'} &= \dd{E}
 \end{align*}
-Originally $E: -\infty \rightarrow \infty$, however, since subtracting a constant doesn't change infinity
+
+Since subtracting a constant does not alter the limits of integration, the integration bounds remain:
 \[
-    E': -\infty \rightarrow \infty
+    E' : -\infty \rightarrow \infty
 \]
-% Final Equations
-Hence, substituting for $E = E' + U$ and replacing $E' \rightarrow E$ produces
+
+Substituting $E = E' + U$ and relabeling $E' \rightarrow E$ yields:
 \begin{equation}
-    N = \int_{-\infty}^{\infty} \frac{\gamma_1 f_1(E+U) + \gamma_2 f_2(E+U)}{\gamma_1 + \gamma_2} D(E) \dd{E}
+    N = \int_{-\infty}^{\infty}
+    \frac{\gamma_1 f_1(E+U) + \gamma_2 f_2(E+U)}{\gamma_1 + \gamma_2}
+    D(E)\, \dd{E}
 \end{equation}
 \begin{equation}
-    I = \frac{q}{\hbar}\frac{\gamma_1 \gamma_2}{\gamma_1 + \gamma_2}\int_{-\infty}^{\infty}[f_1(E+U) - f_2(E+U)]D(E) \dd{E}
+    I = \frac{q}{\hbar}
+    \frac{\gamma_1 \gamma_2}{\gamma_1 + \gamma_2}
+    \int_{-\infty}^{\infty}
+    [f_1(E+U) - f_2(E+U)] D(E)\, \dd{E}
 \end{equation}
 
 \subsection{Solving the Equations Self-Consistently}
@@ -66,15 +78,67 @@ Hence, substituting for $E = E' + U$ and replacing $E' \rightarrow E$ produces
 % --------------------
 % Problem 1b
 % --------------------
-Using the code in \verb|problem1.py| to calculate the values of $N$ and $I$ self-consistently produced the plots seen in Figure \ref{fig:1b_plots}.
+Using the code provided in \verb|problem1.py|, the values of $N$ and $I$ were computed self-consistently. The resulting plots are shown in Figure~\ref{fig:1b_plots}.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=10cm]{imgs/1b.png}
-	\caption{Plot of the current ($I$) and number of electrons ($N$) against the drain voltage ($V_D$)}
+	\caption{Current ($I$) and number of electrons ($N$) as functions of drain voltage ($V_D$).}
 	\label{fig:1b_plots}
 \end{figure}
 
 % --------------------
-% Problem 1b
+% Problem 1c
 % --------------------
+\subsection{Difference Proportional to Current}
+
+By plotting the difference between the Fermi functions using a discrete energy level (modeled as an impulse) rather than a broadened Lorentzian density of states, the relationship between the current $I$ and the difference in the source and drain Fermi functions becomes clearer.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10cm]{imgs/fermi_diff_impulse_plot.png}
+	\caption{Difference between the Fermi functions as a function of energy, with the density of states modeled as an impulse.}
+	\label{fig:fermi_diff_plot}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    $V_D$ (\unit{\volt}) &
+    $\left[f_1(E+U) - f_2(E+U)\right]_{E=\varepsilon}$ &
+    $I$ (\unit{\ampere}) \\
+    \hline
+    0.2 & 0.015 & $1.69 \times 10^{-8}$ \\
+    \hline
+    0.5 & 0.440 & $2.705 \times 10^{-7}$ \\
+    \hline
+    0.8 & 0.970 & $5.736 \times 10^{-7}$ \\
+    \hline
+    1.0 & 1.000 & $6.030 \times 10^{-7}$ \\
+    \hline
+    \end{tabular}
+    \caption{Comparison of the Fermi-function difference and current values at identical drain voltages, evaluated at $\varepsilon = \SI{0.2}{\eV}$.}
+    \label{table:sample}
+\end{table}
+
+\noindent The ratio of $\left[f_1(E+U) - f_2(E+U)\right]_{E=\varepsilon}$ at $V_D = 1.0$ to that at $V_D = 0.8$, and the ratio at $V_D = 0.8$ to that at $V_D = 0.5$, are found to be $1.031$ and $2.205$, respectively.
+
+\noindent Similarly, the corresponding current ratios are $1.051$ and $2.12$. These results confirm that the current scales proportionally with the difference in the Fermi functions.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=5cm]{imgs/1c_f1_step.png}
+	\includegraphics[width=5cm]{imgs/1c_f2_step.png}
+	\caption{Step locations of the Fermi functions at $V_D = \SI{1.0}{\volt}$.}
+	\label{fig:1c_fermi_step}
+\end{figure}
+
+\noindent At $V_D = \SI{1.0}{\volt}$, the step locations of the Fermi functions were determined to be $\mu_1 = 0.3760$ and $\mu_2 = 0.6240$. Using these values in \verb|problem1c3.py| yields a self-consistent potential of $U = \SI{-0.25027}{\eV}$.
+
+\noindent At this drain voltage, the source contact ($f_1$) favors electron injection into the channel, while the drain contact ($f_2$) favors electron absorbtion from the channel. This can be visualized in Figure \ref{fig:1c_fermi_step} where the Fermi function of $f_1$ steps down at a higher energy than $f_2$. These two biases produce current flow through the channel. Therefore, energies that $\varepsilon$ can be located must be less than $\mu_1 = 0.3760$ and greater than $\mu_2 = 0.6240$.\\
+
+\noindent When $V_D = 0$, the electrochemical potentials of the source and drain are equal ($\mu_1 = \mu_2$), which implies that their Fermi functions are identical ($f_1(E) = f_2(E)$). Consequently, the source is trying to fill (or empty) the channel level to the exact same extent that the drain is. The lack of a difference in agenda leads to no net movement of electrons, and thus the current is zero.
+
+\section{Current in a Nanoscale MOSFET}
 \end{document}
