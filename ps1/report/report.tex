@@ -8,6 +8,12 @@
 \usepackage{matlab-prettifier}
 \usepackage{physics}
 \usepackage{siunitx}
+\usepackage{caption}
+\usepackage{pgfplots}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{compat=1.18}
+
+\captionsetup{justification=centering, skip=10pt} % skip=10pt adds the gap
 
 \lhead{}
 \rhead{ECE 456 Problem Set 1}
@@ -141,4 +147,163 @@ By plotting the difference between the Fermi functions using a discrete energy l
 \noindent When $V_D = 0$, the electrochemical potentials of the source and drain are equal ($\mu_1 = \mu_2$), which implies that their Fermi functions are identical ($f_1(E) = f_2(E)$). Consequently, the source is trying to fill (or empty) the channel level to the exact same extent that the drain is. The lack of a difference in agenda leads to no net movement of electrons, and thus the current is zero.
 
 \section{Current in a Nanoscale MOSFET}
+The plots seen in Figure \ref{fig:2a_shaded} were produced by the code provided in \verb|problem2.py|. These figures apply for $V_G = \SI{0.5}{\unit{\volt}}$.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=5cm]{imgs/2a_00_shaded.png}
+	\includegraphics[width=5cm]{imgs/2a_005_shaded.png}
+	\includegraphics[width=5cm]{imgs/2a_01_shaded.png}
+	\includegraphics[width=5cm]{imgs/2a_03_shaded.png}
+	\caption{The highlighted regions represent the area under the $f_1(E+U) - f_2(E+U)$ curve that determines current.}
+	\label{fig:2a_shaded}
+\end{figure}
+
+\noindent As $V_D$ increases, the current saturates because the area under $f_1(E+U) - f_2(E+U)$ remains constant for the region $E \geq 0$. Any further expansion of the curve occurs in the $E < 0$ region, which does not contribute to the total charge transport.\\
+
+\noindent By observing Figure \ref{fig:2a_shaded} it can be seen that the levels involved in the transport of electrons are in the range $\SI{0.2}{\unit{eV}} \geq E \geq \SI{0.0}{\unit{\eV}}$ based on the bounds of the integral of $f_1(E+U) - f_2(E+U)$ for all energies $E \geq 0$.  The energy at which the difference in agenda between the contacts is greatest is $\SI{-0.0875}{\unit{\eV}}$, because the peak of $f_1(E+U) - f_2(E+U)$ falls on this point. Looking at the plots of the individual Fermi functions, $f_1$ settles at its maxima and $f_2$ settles at its minima at the same point.\\
+
+\noindent To maximize the MOSFET's drain current, material A, who's states vanish at an energy of $\SI{-0.4}{\unit{\eV}}$ should be selected. This is because after satisfying $V_{DS} > V_{GS} - V_{T}$ the area in which the curve intersects the region $E \geq 0$ stays constant for any further increase in $V_D$. In order to increase the area, hence the current, the region has to be shifted down to a value below 0.
+
+\section{Thermoelectric Current}
+Consider a channel with a Lorentzian density of states $D(E)$ given by:
+\begin{equation}
+    D(E) = D_{\varepsilon}(E) = \frac{(\gamma_1 + \gamma_2) / 2\pi}{(E - \varepsilon)^2 + [(\gamma_1 + \gamma_2) / 2]^2}
+\end{equation}
+where $\gamma = \gamma_1 + \gamma_2 = \SI{0.01}{eV}$. We calculate the current $I$ flowing between the source and drain contacts held at different temperatures, $k_B T_1 = \SI{0.025}{eV}$ and $k_B T_2 = \SI{0.026}{eV}$, with a common equilibrium Fermi level $\mu = \SI{0}{eV}$. The current is given by:
+\begin{equation}
+    I = \frac{q}{\hbar} \frac{\gamma_1 \gamma_2}{\gamma_1 + \gamma_2} [f_1(E) - f_2(E)] \bigg|_{E=\mathcal{E}}
+\end{equation}
+
+\noindent Since we are ignoring self-consistency, the potential $U$ is assumed to be zero, and the channel energy level $\varepsilon$ is varied from $-\SI{0.25}{eV}$ to $\SI{0.25}{eV}$. \verb|problem3.py| was written to implement this system and produce the following plots
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10cm]{imgs/3b_thermo_plots.png}
+	\caption{Thermoelectric current ($I$) and number of electrons ($N$) as functions of channel energy level ($\varepsilon$).}
+	\label{fig:3b_thermo_plots}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=12cm]{imgs/3c_DOS_fermi_plot.png}
+	\caption{The density of states divided by $2500$ plotted with the difference between the Fermi functions of the contacts at $\varepsilon = -0.05\unit{\eV}$}
+	\label{fig:3c_dos_fermi_plot}
+\end{figure}
+\noindent The shape of the thermoelectric current in Figure \ref{fig:3b_thermo_plots} can be attributed to the difference in the steepness of the contact's Fermi functions due to variation in their thermal energy $KBT$. This causes $f2-f1$ to adopt a dip/bump shape which carries over into the current due to their proportationality, as shown in previous sections. This is further illustrated by Figure \ref{fig:3d_example} where the variation in thermal energy is exaggerated to show how a change in steepness can produce a positive region below $\mu$ and a negative region above $\mu$. Therefore to achieve the maximum value, $\varepsilon$ should be positioned below $\mu$.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    \begin{groupplot}[
+    group style={group size=2 by 1, horizontal sep=1.6cm},
+    width=7.2cm,
+    height=7.2cm,
+    grid=both,
+    ymin=-0.2, ymax=0.2,
+    ylabel={Energy $E$ (eV)},
+    samples=400,        % ← smoothness control
+    domain=-0.2:0.2
+    ]
+
+    % ---------- Left: f1 and f2 ----------
+    \nextgroupplot[
+    xlabel={Occupancy $f(E)$},
+    xmin=0, xmax=1,
+    title={$f_1(E)$ vs $f_2(E)$}
+    ]
+
+    % f1
+    \addplot[
+    thick,
+    orange
+    ] ({1/(1 + exp((x)/0.025))}, x);
+    \addlegendentry{$f_1,\ k_BT=0.025\ \text{eV}$}
+
+    % f2
+    \addplot[
+    thick,
+    red
+    ] ({1/(1 + exp((x)/0.050))}, x);
+    \addlegendentry{$f_2,\ k_BT=0.050\ \text{eV}$}
+
+
+    % ---------- Right: difference ----------
+    \nextgroupplot[
+    xlabel={$f_1(E) - f_2(E)$},
+    xmin=-0.2, xmax=0.2,
+    title={Difference $f_1 - f_2$}
+    ]
+
+    \addplot[
+    thick,
+    blue
+    ] ({1/(1 + exp((x)/0.025)) - 1/(1 + exp((x)/0.050))}, x);
+
+    \addplot[dashed] coordinates {(0,-0.2) (0,0.2)};
+    \addlegendentry{$f_1 - f_2$}
+    \addlegendentry{$0$}
+
+    \end{groupplot}
+\end{tikzpicture}
+\label{fig:3d_example}
+\caption{Continuous Fermi–Dirac functions with different thermal energies. The following plots were sketches transformed into LaTex using ChatGPT.}
+\end{figure}
+
+\section{Applying What We Learned}
+
+\subsection{Operation at Absolute Zero}
+We consider a system operating at absolute zero temperature ($T = \SI{0}{\kelvin}$). The channel is characterized by a discrete energy level $\mathcal{E}$, described by the density of states function $D(E) = \delta(E - \mathcal{E})$. The coupling coefficients to the source and drain contacts are symmetric and given by:
+\[
+    \gamma_1 = \gamma_2 = \SI{0.005}{\eV}
+\]
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10cm]{imgs/4a_question_plot.png}
+	\caption{Plots provided for the absolute zero system.}
+	\label{fig:4a_question_lot}
+\end{figure}
+
+\noindent To calculate the current $I$ and the number of channel electrons $N$ for each of these three cases, the difference between $f_1$ and $f_2$ along with the density of states $D(E) = \delta(E-\varepsilon)$, were analyzed in the context of Equation \ref{num_e2} and \ref{eq:current2}.\\
+
+\noindent For (i) and (iii) it is visibly discernable that $D(E)$ intersects where the Fermi functions are equal, therefore there is no difference in agenda resulting in $I = 0$. However, for (i) the Fermi functions are both at $0$ resulting in $N = 0$, while for (ii) both are at $1$ resulting in $N = 1$.\\
+
+\noindent At (ii), since $D(E)$ intersects with the $f2 - f1$, leading to a difference of agenda. Because the difference between $f2 - f1 = 1$, current can be calculated using
+\[
+    I = \frac{q}{\hbar}\frac{\gamma_1 \gamma_2}{\gamma_1 + \gamma_2} = 0.608 \unit{\nano\ampere}
+\]
+
+\noindent Since $\gamma_1 = \gamma_2$, the number of channel electrons (N) is simply
+\[
+    N = \frac{f_1(E+U) + f_2(E+U)}{2} = 0.5
+\]
+
+\subsection{Self-Consistent Potential and Voltage Extraction}
+Given a self-consistent potential $U = \SI{-0.25}{\eV}$ and an equilibrium Fermi level $\mu = 0$. The source and drain voltages, $V_S$ and $V_D$, are determined by identifying the electrochemical potentials, $\mu_1$ and $\mu_2$, from the steps in the Fermi functions plotted .\\
+
+\noindent If the graph showed $f_1(E + U)$ and $f_2(E + U)$ as is, using the code in \verb|problem4b.py| the source and drain voltage were found to be $V_S = 0 \unit{\volt}$ and $V_D = 0.5 \unit{\volt}$.\\
+
+\noindent However if the graph showed $f_1$ and $f_2$, using the code in \verb|problem4b.py| the source and drain voltage were found to be $V_S = 0.25 \unit{\volt}$ and $V_D = -0.25 \unit{\volt}$
+
+\subsection{Nanoscale MOSFET Calculation}
+We consider a nanoscale MOSFET characterized by a step-function density of states $D(E)$:
+\[
+    D(E) =
+    \begin{cases}
+        10^4 \text{ states/eV} & \text{for } E \ge \SI{-0.1}{\eV} \\
+        0 & \text{for } E < \SI{-0.1}{\eV}
+    \end{cases}
+\]
+
+\noindent The device operates under the bias conditions $V_S = 0$, $V_G = \SI{0.6}{\volt}$, and $V_D = \SI{0.4}{\volt}$. Given these parameters, the self-consistent potential is determined to be $U = \SI{-0.2}{\eV}$, with the equilibrium Fermi level located at $\mu = 0$.\\
+
+\noindent Assuming operation at $T = 0 \unit{\kelvin}$, \verb|problem4c.py| produced the following plots
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=13cm]{imgs/4c_question_plots.png}
+	\caption{Plots for the system assuming $T = 0 \unit{\kelvin}$}
+	\label{fig:4b_question_plot}
+\end{figure}
 \end{document}
