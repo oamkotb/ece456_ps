@@ -1,0 +1,58 @@
+/* File will be included on all pages in the Canvas desktop application. */
+
+/* Some examples from Canvas: https://github.com/unsupported/canvas/tree/master/branding/css */
+
+/* Most branding is done with the Canvas theme editor in admin settings.
+   The txt files in this repo track those color variables and files. This 
+   is just the custom css that overrides Canvas styles. */
+
+/* ----- CUSTOM CSS ----- */
+
+html {
+  font-family: Roboto, "Lato Extended", "Lato", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+}
+
+nav #section-tabs a {
+  color: #275d38;
+}
+
+#courseMenuToggle {
+  color: #275d38;
+}
+
+.css-1jxucsm-pill {
+  color: #6cc24a !important;
+  border-color: #6cc24a !important;
+}
+
+.css-wdjw8c-avatar__initials {
+  color: #6cc24a !important;
+}
+
+.ic-app-header__logomark {
+  background-size: 66px !important;
+}
+
+.nav-icon {
+  color: #6cc24a;
+}
+
+.list-view a.active {
+  border-left: 2px solid #6cc24a;
+}
+
+.label-info,
+.badge-info {
+  background-color: #6cc24a;
+}
+
+.ic-app-footer#footer {
+  display: none;
+}
+
+#wiki_page_show hr{
+  border: 1px solid #f2cd00;
+}
+
+/* ----- END CUSTOM CSS ----- */

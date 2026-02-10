@@ -67,12 +67,12 @@ Since subtracting a constant does not alter the limits of integration, the integ
 \]
 
 Substituting $E = E' + U$ and relabeling $E' \rightarrow E$ yields:
-\begin{equation}
+\begin{equation}\label{eq:num_e2}
     N = \int_{-\infty}^{\infty}
     \frac{\gamma_1 f_1(E+U) + \gamma_2 f_2(E+U)}{\gamma_1 + \gamma_2}
     D(E)\, \dd{E}
 \end{equation}
-\begin{equation}
+\begin{equation}\label{eq:current2}
     I = \frac{q}{\hbar}
     \frac{\gamma_1 \gamma_2}{\gamma_1 + \gamma_2}
     \int_{-\infty}^{\infty}
@@ -112,7 +112,7 @@ By plotting the difference between the Fermi functions using a discrete energy l
     \begin{tabular}{|c|c|c|}
     \hline
     $V_D$ (\unit{\volt}) &
-    $\left[f_1(E+U) - f_2(E+U)\right]_{E=\varepsilon}$ &
+    $\left[f_1(E+U) - f_2(E+U)\right]_{E=\mathcal{E}}$ &
     $I$ (\unit{\ampere}) \\
     \hline
     0.2 & 0.015 & $1.69 \times 10^{-8}$ \\
@@ -124,11 +124,11 @@ By plotting the difference between the Fermi functions using a discrete energy l
     1.0 & 1.000 & $6.030 \times 10^{-7}$ \\
     \hline
     \end{tabular}
-    \caption{Comparison of the Fermi-function difference and current values at identical drain voltages, evaluated at $\varepsilon = \SI{0.2}{\eV}$.}
+    \caption{Comparison of the Fermi-function difference and current values at identical drain voltages, evaluated at $\mathcal{E} = \SI{0.2}{\eV}$.}
     \label{table:sample}
 \end{table}
 
-\noindent The ratio of $\left[f_1(E+U) - f_2(E+U)\right]_{E=\varepsilon}$ at $V_D = 1.0$ to that at $V_D = 0.8$, and the ratio at $V_D = 0.8$ to that at $V_D = 0.5$, are found to be $1.031$ and $2.205$, respectively.
+\noindent The ratio of $\left[f_1(E+U) - f_2(E+U)\right]_{E=\mathcal{E}}$ at $V_D = 1.0$ to that at $V_D = 0.8$, and the ratio at $V_D = 0.8$ to that at $V_D = 0.5$, are found to be $1.031$ and $2.205$, respectively.
 
 \noindent Similarly, the corresponding current ratios are $1.051$ and $2.12$. These results confirm that the current scales proportionally with the difference in the Fermi functions.
 
@@ -142,7 +142,7 @@ By plotting the difference between the Fermi functions using a discrete energy l
 
 \noindent At $V_D = \SI{1.0}{\volt}$, the step locations of the Fermi functions were determined to be $\mu_1 = 0.3760$ and $\mu_2 = 0.6240$. Using these values in \verb|problem1c3.py| yields a self-consistent potential of $U = \SI{-0.25027}{\eV}$.
 
-\noindent At this drain voltage, the source contact ($f_1$) favors electron injection into the channel, while the drain contact ($f_2$) favors electron absorbtion from the channel. This can be visualized in Figure \ref{fig:1c_fermi_step} where the Fermi function of $f_1$ steps down at a higher energy than $f_2$. These two biases produce current flow through the channel. Therefore, energies that $\varepsilon$ can be located must be less than $\mu_1 = 0.3760$ and greater than $\mu_2 = 0.6240$.\\
+\noindent At this drain voltage, the source contact ($f_1$) favors electron injection into the channel, while the drain contact ($f_2$) favors electron absorbtion from the channel. This can be visualized in Figure \ref{fig:1c_fermi_step} where the Fermi function of $f_1$ steps down at a higher energy than $f_2$. These two biases produce current flow through the channel. Therefore, energies that $\mathcal{E}$ can be located must be less than $\mu_1 = 0.3760$ and greater than $\mu_2 = 0.6240$.\\
 
 \noindent When $V_D = 0$, the electrochemical potentials of the source and drain are equal ($\mu_1 = \mu_2$), which implies that their Fermi functions are identical ($f_1(E) = f_2(E)$). Consequently, the source is trying to fill (or empty) the channel level to the exact same extent that the drain is. The lack of a difference in agenda leads to no net movement of electrons, and thus the current is zero.
 
@@ -161,35 +161,35 @@ The plots seen in Figure \ref{fig:2a_shaded} were produced by the code provided 
 
 \noindent As $V_D$ increases, the current saturates because the area under $f_1(E+U) - f_2(E+U)$ remains constant for the region $E \geq 0$. Any further expansion of the curve occurs in the $E < 0$ region, which does not contribute to the total charge transport.\\
 
-\noindent By observing Figure \ref{fig:2a_shaded} it can be seen that the levels involved in the transport of electrons are in the range $\SI{0.2}{\unit{eV}} \geq E \geq \SI{0.0}{\unit{\eV}}$ based on the bounds of the integral of $f_1(E+U) - f_2(E+U)$ for all energies $E \geq 0$.  The energy at which the difference in agenda between the contacts is greatest is $\SI{-0.0875}{\unit{\eV}}$, because the peak of $f_1(E+U) - f_2(E+U)$ falls on this point. Looking at the plots of the individual Fermi functions, $f_1$ settles at its maxima and $f_2$ settles at its minima at the same point.\\
+\noindent By observing Figure \ref{fig:2a_shaded} it can be seen that the levels involved in the transport of electrons are in the range $\SI{0.2}{\unit{eV}} \geq E \geq \SI{0.0}{\unit{\eV}}$ based on the bounds of the integral of $f_1(E+U) - f_2(E+U)$ for all energies $E \geq 0$.  The energy at which the difference in agenda between the contacts is greatest is $\SI{-0.0875}{\unit{\eV}}$, because the peak of $f_1(E+U) - f_2(E+U)$ falls on this point. Looking at the plots of the individual Fermi functions, $f_1$ settles at its maxima and $f_2$ settles at its minima at the same point.\\
 
 \noindent To maximize the MOSFET's drain current, material A, who's states vanish at an energy of $\SI{-0.4}{\unit{\eV}}$ should be selected. This is because after satisfying $V_{DS} > V_{GS} - V_{T}$ the area in which the curve intersects the region $E \geq 0$ stays constant for any further increase in $V_D$. In order to increase the area, hence the current, the region has to be shifted down to a value below 0.
 
 \section{Thermoelectric Current}
 Consider a channel with a Lorentzian density of states $D(E)$ given by:
 \begin{equation}
-    D(E) = D_{\varepsilon}(E) = \frac{(\gamma_1 + \gamma_2) / 2\pi}{(E - \varepsilon)^2 + [(\gamma_1 + \gamma_2) / 2]^2}
+    D(E) = D_{\mathcal{E}}(E) = \frac{(\gamma_1 + \gamma_2) / 2\pi}{(E - \mathcal{E})^2 + [(\gamma_1 + \gamma_2) / 2]^2}
 \end{equation}
 where $\gamma = \gamma_1 + \gamma_2 = \SI{0.01}{eV}$. We calculate the current $I$ flowing between the source and drain contacts held at different temperatures, $k_B T_1 = \SI{0.025}{eV}$ and $k_B T_2 = \SI{0.026}{eV}$, with a common equilibrium Fermi level $\mu = \SI{0}{eV}$. The current is given by:
 \begin{equation}
     I = \frac{q}{\hbar} \frac{\gamma_1 \gamma_2}{\gamma_1 + \gamma_2} [f_1(E) - f_2(E)] \bigg|_{E=\mathcal{E}}
 \end{equation}
 
-\noindent Since we are ignoring self-consistency, the potential $U$ is assumed to be zero, and the channel energy level $\varepsilon$ is varied from $-\SI{0.25}{eV}$ to $\SI{0.25}{eV}$. \verb|problem3.py| was written to implement this system and produce the following plots
+\noindent Since we are ignoring self-consistency, the potential $U$ is assumed to be zero, and the channel energy level $\mathcal{E}$ is varied from $-\SI{0.25}{eV}$ to $\SI{0.25}{eV}$. \verb|problem3.py| was written to implement this system and produce the following plots
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=10cm]{imgs/3b_thermo_plots.png}
-	\caption{Thermoelectric current ($I$) and number of electrons ($N$) as functions of channel energy level ($\varepsilon$).}
+	\caption{Thermoelectric current ($I$) and number of electrons ($N$) as functions of channel energy level ($\mathcal{E}$).}
 	\label{fig:3b_thermo_plots}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=12cm]{imgs/3c_DOS_fermi_plot.png}
-	\caption{The density of states divided by $2500$ plotted with the difference between the Fermi functions of the contacts at $\varepsilon = -0.05\unit{\eV}$}
+	\caption{The density of states divided by $2500$ plotted with the difference between the Fermi functions of the contacts at $\mathcal{E} = -0.05\unit{\eV}$}
 	\label{fig:3c_dos_fermi_plot}
 \end{figure}
-\noindent The shape of the thermoelectric current in Figure \ref{fig:3b_thermo_plots} can be attributed to the difference in the steepness of the contact's Fermi functions due to variation in their thermal energy $KBT$. This causes $f2-f1$ to adopt a dip/bump shape which carries over into the current due to their proportationality, as shown in previous sections. This is further illustrated by Figure \ref{fig:3d_example} where the variation in thermal energy is exaggerated to show how a change in steepness can produce a positive region below $\mu$ and a negative region above $\mu$. Therefore to achieve the maximum value, $\varepsilon$ should be positioned below $\mu$.
+\noindent The shape of the thermoelectric current in Figure \ref{fig:3b_thermo_plots} can be attributed to the difference in the steepness of the contact's Fermi functions due to variation in their thermal energy $KBT$. This causes $f2-f1$ to adopt a dip/bump shape which carries over into the current due to their proportationality, as shown in previous sections. This is further illustrated by Figure \ref{fig:3d_example} where the variation in thermal energy is exaggerated to show how a change in steepness can produce a positive region below $\mu$ and a negative region above $\mu$. Therefore to achieve the maximum value, $\mathcal{E}$ should be positioned below $\mu$.
 
 \begin{figure}[H]
 \centering
@@ -264,7 +264,7 @@ We consider a system operating at absolute zero temperature ($T = \SI{0}{\kelvin
 	\label{fig:4a_question_lot}
 \end{figure}
 
-\noindent To calculate the current $I$ and the number of channel electrons $N$ for each of these three cases, the difference between $f_1$ and $f_2$ along with the density of states $D(E) = \delta(E-\varepsilon)$, were analyzed in the context of Equation \ref{num_e2} and \ref{eq:current2}.\\
+\noindent To calculate the current $I$ and the number of channel electrons $N$ for each of these three cases, the difference between $f_1$ and $f_2$ along with the density of states $D(E) = \delta(E-\mathcal{E})$, were analyzed in the context of Equation \ref{num_e2} and \ref{eq:current2}.\\
 
 \noindent For (i) and (iii) it is visibly discernable that $D(E)$ intersects where the Fermi functions are equal, therefore there is no difference in agenda resulting in $I = 0$. However, for (i) the Fermi functions are both at $0$ resulting in $N = 0$, while for (ii) both are at $1$ resulting in $N = 1$.\\
 
@@ -299,11 +299,70 @@ We consider a nanoscale MOSFET characterized by a step-function density of state
 
 \noindent Assuming operation at $T = 0 \unit{\kelvin}$, \verb|problem4c.py| produced the following plots
 
-
-\begin{figure}[H]
+\begin{figure}[H]i
 	\centering
 	\includegraphics[width=13cm]{imgs/4c_question_plots.png}
-	\caption{Plots for the system assuming $T = 0 \unit{\kelvin}$}
+	\caption{Plots for the system assuming $T = 0 \unit{\kelvin}$, the shaded area determines the current.}
 	\label{fig:4b_question_plot}
 \end{figure}
+
+\noindent If $\gamma_1 = \gamma_2 = 0.005 eV$, to calculate the current, first we determine the energy range of the Fermi window at $T=\SI{0}{\kelvin}$. The window extends from the drain potential to the source potential, adjusted by the self-consistent potential $U$:
+\begin{align*}
+    E_{\text{upper}} &= \mu_1 - U = 0 - (-0.2) = \SI{0.2}{\eV} \\
+    E_{\text{lower}} &= \mu_2 - U = -0.4 - (-0.2) = \SI{-0.2}{\eV}
+\end{align*}
+
+\noindent The density of states $D(E)$ is non-zero ($10^4$) only for $E \ge \SI{-0.1}{\eV}$. Therefore, the effective integration range is restricted to $[\SI{-0.1}{\eV}, \SI{0.2}{\eV}]$.
+
+\noindent Substituting the given values $\gamma_1 = \gamma_2 = \SI{0.005}{\eV}$ into Equation \ref{eq:current2}:
+\begin{align*}
+    I &= \frac{q}{\hbar} \frac{\gamma_1 \gamma_2}{\gamma_1 + \gamma_2} \int_{-0.1}^{0.2} D(E) \, \dd{E} \\
+    I &= \frac{q}{\hbar} \left( \frac{0.005^2}{0.01} \unit{\eV} \right) \left[ 10^4 \times (0.2 - (-0.1)) \right] \\
+    I &= \frac{q}{\hbar} (\SI{0.0025}{\eV}) (3000) \\
+    I &= \frac{q}{\hbar} (\SI{7.5}{\eV})
+\end{align*}
+
+\noindent Converting $\SI{7.5}{\eV}$ to Joules ($\SI{1.2015e-18}{\joule}$) to solve for the current in Amperes:
+\[
+    I = \frac{1.602 \times 10^{-19}}{1.055 \times 10^{-34}} \times 1.2015 \times 10^{-18} \approx \SI{1.82}{\milli\ampere}
+\]
+
+\noindent At a specified $V_G$ and $V_S$ and a sufficiently high drain voltage, the self-consistent potential saturates to a value of $\SI{-0.3}{\unit{\eV}}$. The current is determined by the area under the curve, and since area changed by a factor of $4/3$ the new current can be determined by multiplying the old current by a factor of $4/3$. This produces a value of $I = \SI{2.43}{\unit{\milli\ampere}}$.
+
+\section{Calculation of Coupling Coefficient $\gamma_2$}
+
+We consider a nanodevice with a density of states approximated by a delta function $D(E) = \delta(E - \mathcal{E})$, where the energy level is located at $\mathcal{E} = \SI{0.2}{\eV}$. The device operates at room temperature ($k_B T = \SI{0.025}{\eV}$) with an equilibrium Fermi level $\mu = 0$.
+
+\noindent The electrical parameters and bias conditions are given as:
+\begin{itemize}
+    \item Biases: $V_G = V_S = \SI{0}{\volt}$, $V_D = \SI{0.6}{\volt}$.
+    \item Capacitance parameters: $\alpha_G = \alpha_D = 0.5$, $\alpha_S = 0$.
+    \item Charging energy: $U_0 = \SI{0.25}{\eV}$.
+    \item Reference electrons: $N_0 = 0$.
+\end{itemize}
+
+\noindent The self-consistent potential $U$ is the sum of the Laplace potential ($U_L$) and the Poisson potential ($U_P$), producing the following equation
+\begin{equation}\label{eq:potential}
+    U = U_L + U_P = -(\alpha_G V_G + \alpha_S V_S + \alpha_D V_D) + U_0(N - N_0)
+\end{equation}
+\noindent Given the self-consistent electron number $N = 0.325$ and the source coupling $\gamma_1 = \SI{5.00e-3}{\eV}$, we rearrange Equation \ref{eq:num_e2} to solve for $\gamma_2$
+\begin{equation}\label{eq:gamma_1}
+    \gamma_2 = \gamma_1 \frac{f_1(\mathcal{E} + U) - N}{N - f_2(\mathcal{E} + U)}
+\end{equation}
+Using the Equations \ref{eq:potential} and \ref{eq:gamma_1}, first we compute the self-consistent potential $U$:
+\begin{align*}
+    U &= -[0.5(0) + 0(0) + 0.5(0.6)] + 0.25(0.325 - 0) \\
+    U &= -0.3 + 0.08125 = \SI{-0.21875}{\eV}
+\end{align*}
+
+\noindent Next, we evaluate the Fermi functions at the shifted energy level $E' = \mathcal{E} + U = 0.2 - 0.21875 = \SI{-0.01875}{\eV}$. With $\mu_1 = 0$ and $\mu_2 = -qV_D = \SI{-0.6}{\eV}$:
+\begin{align*}
+    f_1 &= \frac{1}{1 + e^{(E' - \mu_1)/k_B T}} = \frac{1}{1 + e^{-0.01875/0.025}} = \frac{1}{1 + e^{-0.75}} \approx 0.6792 \\
+    f_2 &= \frac{1}{1 + e^{(E' - \mu_2)/k_B T}} = \frac{1}{1 + e^{(-0.01875 + 0.6)/0.025}} = \frac{1}{1 + e^{23.25}} \approx 0
+\end{align*}
+
+\noindent Finally, substituting these values into Equation \ref{eq:gamma_1}:
+\[
+    \gamma_2 = (5.00 \times 10^{-3}) \frac{0.6792 - 0.325}{0.325 - 0} \approx \SI{5.45e-3}{\eV}
+\]
 \end{document}
