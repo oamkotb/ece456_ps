@@ -10,6 +10,7 @@
 \usepackage{siunitx}
 \usepackage{caption}
 \usepackage{pgfplots}
+
 \usepgfplotslibrary{groupplots}
 \pgfplotsset{compat=1.18}
 
@@ -128,7 +129,7 @@ By plotting the difference between the Fermi functions using a discrete energy l
     \label{table:sample}
 \end{table}
 
-\noindent The ratio of $\left[f_1(E+U) - f_2(E+U)\right]_{E=\mathcal{E}}$ at $V_D = 1.0$ to that at $V_D = 0.8$, and the ratio at $V_D = 0.8$ to that at $V_D = 0.5$, are found to be $1.031$ and $2.205$, respectively.
+\noindent The ratio of $\left[f_1(E+U) - f_2(E+U)\right]_{E=\mathcal{E}}$ at $V_D = 1.0$ to that at $V_D = 0.8$, and the ratio at $V_D = 0.8$ to that at $V_D = 0.5$, are found to be \boxed{1.031} and \boxed{2.205}, respectively.
 
 \noindent Similarly, the corresponding current ratios are $1.051$ and $2.12$. These results confirm that the current scales proportionally with the difference in the Fermi functions.
 
@@ -140,9 +141,9 @@ By plotting the difference between the Fermi functions using a discrete energy l
 	\label{fig:1c_fermi_step}
 \end{figure}
 
-\noindent At $V_D = \SI{1.0}{\volt}$, the step locations of the Fermi functions were determined to be $\mu_1 = 0.3760$ and $\mu_2 = 0.6240$. Using these values in \verb|problem1c3.py| yields a self-consistent potential of $U = \SI{-0.25027}{\eV}$.
+\noindent At $V_D = \SI{1.0}{\volt}$, the step locations of the Fermi functions were determined to be $\mu_1 = 0.3760$ and $\mu_2 = 0.6240$. Using these values in \verb|problem1c3.py| yields a self-consistent potential of \boxed{U = \SI{-0.25027}{\eV}}\\
 
-\noindent At this drain voltage, the source contact ($f_1$) favors electron injection into the channel, while the drain contact ($f_2$) favors electron absorbtion from the channel. This can be visualized in Figure \ref{fig:1c_fermi_step} where the Fermi function of $f_1$ steps down at a higher energy than $f_2$. These two biases produce current flow through the channel. Therefore, energies that $\mathcal{E}$ can be located must be less than $\mu_1 = 0.3760$ and greater than $\mu_2 = 0.6240$.\\
+\noindent At this drain voltage, the source contact ($f_1$) favors electron injection into the channel, while the drain contact ($f_2$) favors electron absorbtion from the channel. This can be visualized in Figure \ref{fig:1c_fermi_step} where the Fermi function of $f_1$ steps down at a higher energy than $f_2$. These two biases produce current flow through the channel. \textbf{Therefore, energies that $\mathcal{E}$ can be located must be less than $\mu_1 = 0.3760$ and greater than $\mu_2 = 0.6240$.}\\
 
 \noindent When $V_D = 0$, the electrochemical potentials of the source and drain are equal ($\mu_1 = \mu_2$), which implies that their Fermi functions are identical ($f_1(E) = f_2(E)$). Consequently, the source is trying to fill (or empty) the channel level to the exact same extent that the drain is. The lack of a difference in agenda leads to no net movement of electrons, and thus the current is zero.
 
@@ -161,9 +162,9 @@ The plots seen in Figure \ref{fig:2a_shaded} were produced by the code provided 
 
 \noindent As $V_D$ increases, the current saturates because the area under $f_1(E+U) - f_2(E+U)$ remains constant for the region $E \geq 0$. Any further expansion of the curve occurs in the $E < 0$ region, which does not contribute to the total charge transport.\\
 
-\noindent By observing Figure \ref{fig:2a_shaded} it can be seen that the levels involved in the transport of electrons are in the range $\SI{0.2}{\unit{eV}} \geq E \geq \SI{0.0}{\unit{\eV}}$ based on the bounds of the integral of $f_1(E+U) - f_2(E+U)$ for all energies $E \geq 0$.  The energy at which the difference in agenda between the contacts is greatest is $\SI{-0.0875}{\unit{\eV}}$, because the peak of $f_1(E+U) - f_2(E+U)$ falls on this point. Looking at the plots of the individual Fermi functions, $f_1$ settles at its maxima and $f_2$ settles at its minima at the same point.\\
+\noindent By observing Figure \ref{fig:2a_shaded} it can be seen that the levels involved in the transport of electrons are in the range \boxed{\SI{0.2}{\unit{eV}} \geq E \geq \SI{0.0}{\unit{\eV}}} based on the bounds of the integral of $f_1(E+U) - f_2(E+U)$ for all energies $E \geq 0$.  The energy at which the difference in agenda between the contacts is greatest is \boxed{\SI{-0.0875}{\unit{\eV}}}, because the peak of $f_1(E+U) - f_2(E+U)$ falls on this point. Looking at the plots of the individual Fermi functions, $f_1$ settles at its maxima and $f_2$ settles at its minima at the same point.\\
 
-\noindent To maximize the MOSFET's drain current, material A, who's states vanish at an energy of $\SI{-0.4}{\unit{\eV}}$ should be selected. This is because after satisfying $V_{DS} > V_{GS} - V_{T}$ the area in which the curve intersects the region $E \geq 0$ stays constant for any further increase in $V_D$. In order to increase the area, hence the current, the region has to be shifted down to a value below 0.
+\noindent To maximize the MOSFET's drain current, \textbf{material A}, who's states vanish at an energy of $\SI{-0.4}{\unit{\eV}}$ should be selected. This is because after satisfying $V_{DS} > V_{GS} - V_{T}$ the area in which the curve intersects the region $E \geq 0$ stays constant for any further increase in $V_D$. In order to increase the area, hence the current, the region has to be shifted down to a value below 0.
 
 \section{Thermoelectric Current}
 Consider a channel with a Lorentzian density of states $D(E)$ given by:
@@ -189,7 +190,7 @@ where $\gamma = \gamma_1 + \gamma_2 = \SI{0.01}{eV}$. We calculate the current $
 	\caption{The density of states divided by $2500$ plotted with the difference between the Fermi functions of the contacts at $\mathcal{E} = -0.05\unit{\eV}$}
 	\label{fig:3c_dos_fermi_plot}
 \end{figure}
-\noindent The shape of the thermoelectric current in Figure \ref{fig:3b_thermo_plots} can be attributed to the difference in the steepness of the contact's Fermi functions due to variation in their thermal energy $KBT$. This causes $f2-f1$ to adopt a dip/bump shape which carries over into the current due to their proportationality, as shown in previous sections. This is further illustrated by Figure \ref{fig:3d_example} where the variation in thermal energy is exaggerated to show how a change in steepness can produce a positive region below $\mu$ and a negative region above $\mu$. Therefore to achieve the maximum value, $\mathcal{E}$ should be positioned below $\mu$.
+\noindent The shape of the thermoelectric current in Figure \ref{fig:3b_thermo_plots} can be attributed to the difference in the steepness of the contact's Fermi functions due to variation in their thermal energy $KBT$. This causes $f2-f1$ to adopt a dip/bump shape which carries over into the current due to their proportationality, as shown in previous sections. This is further illustrated by Figure \ref{fig:3d_example} where the variation in thermal energy is exaggerated to show how a change in steepness can produce a positive region below $\mu$ and a negative region above $\mu$. \textbf{Therefore to achieve the maximum value, $\mathcal{E}$ should be positioned below $\mu$.}
 
 \begin{figure}[H]
 \centering
@@ -245,8 +246,8 @@ where $\gamma = \gamma_1 + \gamma_2 = \SI{0.01}{eV}$. We calculate the current $
 
     \end{groupplot}
 \end{tikzpicture}
-\label{fig:3d_example}
 \caption{Continuous Fermi–Dirac functions with different thermal energies. The following plots were sketches transformed into LaTex using ChatGPT.}
+\label{fig:3d_example}
 \end{figure}
 
 \section{Applying What We Learned}
@@ -264,26 +265,26 @@ We consider a system operating at absolute zero temperature ($T = \SI{0}{\kelvin
 	\label{fig:4a_question_lot}
 \end{figure}
 
-\noindent To calculate the current $I$ and the number of channel electrons $N$ for each of these three cases, the difference between $f_1$ and $f_2$ along with the density of states $D(E) = \delta(E-\mathcal{E})$, were analyzed in the context of Equation \ref{num_e2} and \ref{eq:current2}.\\
+\noindent To calculate the current $I$ and the number of channel electrons $N$ for each of these three cases, the difference between $f_1$ and $f_2$ along with the density of states $D(E) = \delta(E-\mathcal{E})$, were analyzed in the context of Equation \ref{eq:num_e2} and \ref{eq:current2}.\\
 
-\noindent For (i) and (iii) it is visibly discernable that $D(E)$ intersects where the Fermi functions are equal, therefore there is no difference in agenda resulting in $I = 0$. However, for (i) the Fermi functions are both at $0$ resulting in $N = 0$, while for (ii) both are at $1$ resulting in $N = 1$.\\
+\noindent For (i) and (iii) it is visibly discernable that $D(E)$ intersects where the Fermi functions are equal, therefore there is no difference in agenda resulting in $I = 0$. However, for (i) the Fermi functions are both at $0$ resulting in \boxed{N = 0}, while for (ii) both are at $1$ resulting in \boxed{N = 1}.\\
 
 \noindent At (ii), since $D(E)$ intersects with the $f2 - f1$, leading to a difference of agenda. Because the difference between $f2 - f1 = 1$, current can be calculated using
 \[
-    I = \frac{q}{\hbar}\frac{\gamma_1 \gamma_2}{\gamma_1 + \gamma_2} = 0.608 \unit{\nano\ampere}
+    I = \frac{q}{\hbar}\frac{\gamma_1 \gamma_2}{\gamma_1 + \gamma_2} = \boxed{0.608 \unit{\nano\ampere}}
 \]
 
 \noindent Since $\gamma_1 = \gamma_2$, the number of channel electrons (N) is simply
 \[
-    N = \frac{f_1(E+U) + f_2(E+U)}{2} = 0.5
+    N = \frac{f_1(E+U) + f_2(E+U)}{2} = \boxed{0.5}
 \]
 
 \subsection{Self-Consistent Potential and Voltage Extraction}
 Given a self-consistent potential $U = \SI{-0.25}{\eV}$ and an equilibrium Fermi level $\mu = 0$. The source and drain voltages, $V_S$ and $V_D$, are determined by identifying the electrochemical potentials, $\mu_1$ and $\mu_2$, from the steps in the Fermi functions plotted .\\
 
-\noindent If the graph showed $f_1(E + U)$ and $f_2(E + U)$ as is, using the code in \verb|problem4b.py| the source and drain voltage were found to be $V_S = 0 \unit{\volt}$ and $V_D = 0.5 \unit{\volt}$.\\
+\noindent If the graph showed $f_1(E + U)$ and $f_2(E + U)$ as is, using the code in \verb|problem4b.py| the source and drain voltage were found to be \boxed{V_S = 0 \unit{\volt}$ and $V_D = 0.5 \unit{\volt}}\\
 
-\noindent However if the graph showed $f_1$ and $f_2$, using the code in \verb|problem4b.py| the source and drain voltage were found to be $V_S = 0.25 \unit{\volt}$ and $V_D = -0.25 \unit{\volt}$
+\noindent However if the graph showed $f_1$ and $f_2$, using the code in \verb|problem4b.py| the source and drain voltage were found to be \boxed{V_S = 0.25 \unit{\volt}$ and $V_D = -0.25 \unit{\volt}}
 
 \subsection{Nanoscale MOSFET Calculation}
 We consider a nanoscale MOSFET characterized by a step-function density of states $D(E)$:
@@ -299,7 +300,7 @@ We consider a nanoscale MOSFET characterized by a step-function density of state
 
 \noindent Assuming operation at $T = 0 \unit{\kelvin}$, \verb|problem4c.py| produced the following plots
 
-\begin{figure}[H]i
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=13cm]{imgs/4c_question_plots.png}
 	\caption{Plots for the system assuming $T = 0 \unit{\kelvin}$, the shaded area determines the current.}
@@ -327,9 +328,9 @@ We consider a nanoscale MOSFET characterized by a step-function density of state
     I = \frac{1.602 \times 10^{-19}}{1.055 \times 10^{-34}} \times 1.2015 \times 10^{-18} \approx \SI{1.82}{\milli\ampere}
 \]
 
-\noindent At a specified $V_G$ and $V_S$ and a sufficiently high drain voltage, the self-consistent potential saturates to a value of $\SI{-0.3}{\unit{\eV}}$. The current is determined by the area under the curve, and since area changed by a factor of $4/3$ the new current can be determined by multiplying the old current by a factor of $4/3$. This produces a value of $I = \SI{2.43}{\unit{\milli\ampere}}$.
+\noindent At a specified $V_G$ and $V_S$ and a sufficiently high drain voltage, the self-consistent potential saturates to a value of $\SI{-0.3}{\unit{\eV}}$. The current is determined by the area under the curve, and since area changed by a factor of $4/3$ the new current can be determined by multiplying the old current by a factor of $4/3$. This produces a value of \boxed{I = \SI{2.43}{\unit{\milli\ampere}}.}
 
-\section{Calculation of Coupling Coefficient $\gamma_2$}
+\subsection{Calculation of Coupling Coefficient $\gamma_2$}
 
 We consider a nanodevice with a density of states approximated by a delta function $D(E) = \delta(E - \mathcal{E})$, where the energy level is located at $\mathcal{E} = \SI{0.2}{\eV}$. The device operates at room temperature ($k_B T = \SI{0.025}{\eV}$) with an equilibrium Fermi level $\mu = 0$.
 
@@ -363,6 +364,484 @@ Using the Equations \ref{eq:potential} and \ref{eq:gamma_1}, first we compute th
 
 \noindent Finally, substituting these values into Equation \ref{eq:gamma_1}:
 \[
-    \gamma_2 = (5.00 \times 10^{-3}) \frac{0.6792 - 0.325}{0.325 - 0} \approx \SI{5.45e-3}{\eV}
+    \gamma_2 = (5.00 \times 10^{-3}) \frac{0.6792 - 0.325}{0.325 - 0} \approx \boxed{\SI{5.45e-3}{\eV}}
 \]
+
+\subsection{Thermoelectric Detector Optimization}
+We analyze the thermoelectric current in a single-level channel driven by a temperature difference between the source and drain contacts. The system operates with an equilibrium Fermi level $\mu = 0$, ignoring self-consistency.\\
+
+\noindent The current $I$ through the device is proportional to the difference in the Fermi functions of the two contacts at the molecule's specified energy level $E$. Since $\gamma_1 = \gamma_2$, the difference in agenda can be written as
+\begin{equation} \label{eq:delta_f}
+    \Delta f(E) = f_1(E) - f_2(E) = \frac{1}{1 + e^{(E - \mu)/k_B T_1}} - \frac{1}{1 + e^{(E - \mu)/k_B T_2}}
+\end{equation}
+
+\noindent Given the thermal energies $k_B T_1 = \SI{0.024}{\eV}$ and $k_B T_2 = \SI{0.027}{\eV}$, we evaluate $\Delta f$ for each molecule.\\
+
+\noindent \textbf{Molecule A ($E = \SI{0}{\eV}$):}
+\[
+    \Delta f_A = \frac{1}{1 + e^0} - \frac{1}{1 + e^0} = 0.5 - 0.5 = 0
+\]
+
+\noindent \textbf{Molecule B ($E = \SI{-0.05}{\eV}$):}
+\begin{align*}
+    f_1 &= \frac{1}{1 + e^{-0.05/0.024}} = \frac{1}{1 + e^{-2.083}} \approx 0.8893 \\
+    f_2 &= \frac{1}{1 + e^{-0.05/0.027}} = \frac{1}{1 + e^{-1.852}} \approx 0.8644 \\
+    \Delta f_B &= 0.8893 - 0.8644 = 0.0249
+\end{align*}
+
+\noindent \textbf{Molecule C ($E = \SI{-0.1}{\eV}$):}
+\begin{align*}
+    f_1 &= \frac{1}{1 + e^{-0.1/0.024}} = \frac{1}{1 + e^{-4.167}} \approx 0.9847 \\
+    f_2 &= \frac{1}{1 + e^{-0.1/0.027}} = \frac{1}{1 + e^{-3.704}} \approx 0.9759 \\
+    \Delta f_C &= 0.9847 - 0.9759 = 0.0088
+\end{align*}
+
+\noindent Comparing the results, Molecule B yields the largest difference in Fermi distributions. Since the current is proportional to the difference, the thermoelectric current is maximized with \boxed{\textbf{Molecule B}.}
+
+\subsection{Nanoscale MOSFET Channel Analysis}
+A nanoscale MOSFET is cooled to $T = \SI{0}{\kelvin}$ to compare two channel materials. The system assumes a self-consistent potential $U = 0$ and an equilibrium Fermi level $\mu = 0$.
+
+\begin{itemize}
+    \item Source: $V_S = \SI{-2}{\volt} \implies \mu_1 = \mu - qV_S = \SI{+2}{\eV}$
+    \item Drain: $V_D = \SI{1}{\volt} \implies \mu_2 = \mu - qV_D = \SI{-1}{\eV}$
+\end{itemize}
+
+\noindent Both materials share a constant density of states $D(E) = 10^4 \, \si{\per\eV}$ and a constant drain coupling $\gamma_2 = \SI{0.005}{\eV}$. The source coupling $\gamma_1$ varies by material:
+
+\noindent \textit{Material A:}
+\[
+    \gamma_1(E) = \begin{cases} \SI{0.005}{\eV} & E \ge 0 \\ 0 & E < 0 \end{cases}
+\]
+
+\noindent \textit{Material B:}
+\[
+    \gamma_1(E) = \begin{cases} 0 & E \ge 0 \\ \SI{0.005}{\eV} & E < 0 \end{cases}
+\]
+
+\noindent The equation of current, Equation \ref{eq:current2}, can be rewritten as.
+\[
+    I = \frac{q}{\hbar}
+    \frac{\gamma_1 \gamma_2}{\gamma_1 + \gamma_2}
+    \int_{-\infty}^{\infty}
+    [f_1(E) - f_2(E)] D(E)\, \dd{E}
+\]
+
+\noindent At $T = \SI{0}{\kelvin}$, the Fermi functions act as step functions defined by $\mu_1 = \SI{2}{\eV}$ and $\mu_2 = \SI{-1}{\eV}$. Their difference is
+\begin{equation}
+    f_1(E) - f_2(E) =
+    \begin{cases}
+        1 & \text{for } \mu_2 < E < \mu_1 \ (\text{i.e., } -1 < E < 2) \\
+        0 & \text{otherwise}
+    \end{cases}
+\end{equation}
+
+\subsubsection{Material A}
+For Material A, $\gamma_1$ is non-zero only for $E \ge 0$.
+\noindent The current integral covers the range $[0, 2]$:
+\begin{align*}
+    I_A &= \frac{q}{\hbar} \int_{0}^{2} (0.0025)(10^4) \, \dd{E} \\
+    I_A &= \frac{q}{\hbar} [25 \times (2 - 0)] = \frac{q}{\hbar} (\SI{50}{\eV}) \approx \boxed{\SI{12.17}{\milli\ampere}}
+\end{align*}
+
+\subsubsection{Material B}
+For Material B, $\gamma_1$ is non-zero only for $E < 0$.
+\noindent The current integral covers the range $[-1, 0]$:
+\begin{align*}
+    I_B &= \frac{q}{\hbar} \int_{-1}^{0} (0.0025)(10^4) \, \dd{E} \\
+    I_B &= \frac{q}{\hbar} [25 \times (0 - (-1))] = \frac{q}{\hbar} (\SI{25}{\eV}) \approx \boxed{\SI{6.09}{\milli\ampere}}
+\end{align*}
+
+\subsection{Numbered of Broadened Energy Level}
+A small conductor is placed between two contacts and a voltage of $\SI{4.3}{\unit{\milli\volt}}$ is applied. It is found that the maximum current is $\SI{500}{\unit{\nano\ampere}}$. To find the number of broadened energy levels $N$, begin by calculating the conductance
+\[
+    G = I/V = 1.163 \times 10^{-4}\,\unit{\siemens}
+\]
+To find $N$ simply divide $G$ by the \textit{quantum of conductance} $G_0$
+\[
+N = \frac{G}{G_0} = \frac{1.163 \times 10^{-4}\,\unit{\siemens}}{q^2/h}
+\]
+Now we solve for $N$:
+\[
+    N = \frac{1.163 \times 10^{-4}}{3.874 \times 10^{-5}} \approx 3.002
+\]
+So there are \boxed{3} broadened energy levels present in the conductor.
+
+\newpage
+\section*{Appendix: problem1.py}
+\label{appendix:python_code}
+
+\begin{lstlisting}[
+    language=Python,
+    caption={Self-consistent calculation of electron flow and current in a nanodevice.},
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{gray!5}
+]
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Physical constants in MKS units
+hbar = 1.054e-34  # [J*s] reduced Planck constant
+q = 1.602e-19     # [C] elementary charge
+
+# Energy parameters in eV
+U0 = 0.25         # [eV] single-electron charging energy
+kBT = 0.025       # [eV] thermal energy (k_B*T)
+mu = 0.0          # [eV] equilibrium Fermi level
+cal_E = 0.2       # [eV] energy level (center of DOS)
+
+# Capacitance / coupling factors
+alpha_G = 0.5
+alpha_D = 0.5
+alpha_S = 1.0 - alpha_G - alpha_D
+
+# Energy grid in eV
+NE = 501
+E_grid = np.linspace(-1.0, 1.0, NE)
+dE = E_grid[1] - E_grid[0]
+
+# Gamma parameters (eV)
+gamma_1 = 0.005
+gamma_2 = 0.005
+gamma = gamma_1 + gamma_2
+
+# Lorentzian density of states D(E)
+D = (gamma / (2 * np.pi)) / ((E_grid - cal_E)**2 + (gamma / 2)**2)
+D /= (np.sum(D) * dE)  # Normalization
+
+# Voltage sweep (V)
+NV = 101
+VV = np.linspace(0.0, 1.0, NV)
+dV = VV[1] - VV[0]
+
+N = np.zeros(NV)
+I = np.zeros(NV)
+
+for count in range(NV):
+    VG, VS = 0.0, 0.0
+    VD = VV[count]
+
+    mu1 = mu - VS
+    mu2 = mu - VD
+    UL = -(alpha_G * VG) - (alpha_D * VD) - (alpha_S * VS)
+
+    UP = 0.0
+    dUP = 1.0
+
+    # Self-consistent iteration
+    while dUP > 1e-6:
+        U = UL + UP
+        f1 = 1 / (1 + np.exp((E_grid + U - mu1) / kBT))
+        f2 = 1 / (1 + np.exp((E_grid + U - mu2) / kBT))
+
+        N_current = dE * np.sum((gamma_1 * f1 + gamma_2 * f2) * D) / gamma
+        UPnew = U0 * (N_current - 0)
+
+        dUP = abs(UP - UPnew)
+        UP += 0.1 * (UPnew - UP)
+
+    N[count] = N_current
+    I[count] = q * (q / hbar) * (gamma_1 * gamma_2 / gamma) * dE * np.sum((f1 - f2) * D)
+
+# Plotting logic omitted for brevity in listing...
+\end{lstlisting}
+
+\section*{Appendix: problem1c.py}
+\label{appendix:calc_u}
+
+\begin{lstlisting}[
+    language=Python,
+    caption={Iterative solver for self-consistent potential $U$.},
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!3}
+]
+import numpy as np
+
+# Physical and Energy Parameters
+kBT = 0.025     # [eV] thermal energy
+U0 = 0.25       # [eV] charging energy
+cal_E = 0.2     # [eV] center of DOS
+gamma_1 = 0.005 # [eV]
+gamma_2 = 0.005 # [eV]
+gamma = gamma_1 + gamma_2
+
+# Energy Grid
+E = np.linspace(-1.0, 1.0, 501)
+dE = E[1] - E[0]
+
+# Normalized Lorentzian DOS
+D = (gamma / (2 * np.pi)) / ((E - cal_E)**2 + (gamma / 2)**2)
+D /= (np.sum(D) * dE)
+
+# Specific Bias Conditions for Problem 1c
+mu1, mu2 = 0.3760, 0.6240
+VG, VD, VS = 0.0, 1.0, 0.0 # Example at VD = 1.0V
+alpha_G, alpha_D, alpha_S = 0.5, 0.5, 0.0
+
+UL = -(alpha_G * VG + alpha_D * VD + alpha_S * VS)
+UP = 0.0
+dUP = 1.0
+
+# Iterative Self-Consistent Loop
+while dUP > 1e-6:
+    U = UL + UP
+    f1 = 1 / (1 + np.exp((E + U - mu1) / kBT))
+    f2 = 1 / (1 + np.exp((E + U - mu2) / kBT))
+
+    N = dE * np.sum((gamma_1 * f1 + gamma_2 * f2) * D) / gamma
+    UPnew = U0 * (N - 0) # N0 = 0
+
+    dUP = abs(UP - UPnew)
+    UP += 0.1 * (UPnew - UP)
+
+print(f"Self-consistent Potential U: {UL + UP:.5f} eV")
+\end{lstlisting}
+
+\newpage
+\section*{Appendix: problem2.py}
+\label{appendix:mosfet_sim}
+
+\begin{lstlisting}[
+    language=Python,
+    caption={Self-consistent MOSFET solver with step-function DOS.},
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{gray!5}
+]
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Physical constants
+hbar = 1.054e-34
+q = 1.602e-19
+epsilon_0 = 8.854e-12
+epsilon_r = 4
+mstar = 0.25 * 9.11e-31
+
+# Device Dimensions [m]
+W, L, tox = 1.0e-6, 10.0e-9, 1.5e-9
+
+# Capacitance Model
+CG = epsilon_r * epsilon_0 * W * L / tox
+CS, CD = 0.05 * CG, 0.05 * CG
+CE = CG + CS + CD
+alpha_G, alpha_D = CG / CE, CD / CE
+alpha_S = 1 - alpha_G - alpha_D
+
+# Energy and DOS Parameters
+kBT, U0 = 0.025, q / CE
+E = np.linspace(-1, 1, 501)
+dE = E[1] - E[0]
+vR = 1e5
+gamma_1 = gamma_2 = hbar * vR / (q * L)
+gamma = gamma_1 + gamma_2
+
+# Step-like DOS
+D0 = mstar * q * W * L / (np.pi * hbar**2)
+D = D0 * np.concatenate((np.zeros(251), np.ones(250)))
+
+# Self-Consistent Loop
+mu = -0.2
+N0 = dE * np.sum(D * (1 / (1 + np.exp((E - mu) / kBT))))
+VV = np.linspace(0, 0.6, 61)
+
+for VG in [0.25, 0.5]:
+    ID = np.zeros_like(VV)
+    for count, VD in enumerate(VV):
+        mu1, mu2 = mu, mu - VD
+        UL = -(alpha_G * VG + alpha_D * VD)
+        UP, dUP = 0, 1
+
+        while dUP > 1e-6:
+            U = UL + UP
+            f1 = 1 / (1 + np.exp((E + U - mu1) / kBT))
+            f2 = 1 / (1 + np.exp((E + U - mu2) / kBT))
+            N = dE * np.sum(((gamma_1/gamma)*f1 + (gamma_2/gamma)*f2) * D)
+            UPnew = U0 * (N - N0)
+            dUP = abs(UP - UPnew)
+            UP += 0.1 * (UPnew - UP)
+
+        ID[count] = q * (q/hbar) * (gamma_1*gamma_2/gamma) * dE * np.sum((f1 - f2) * D)
+
+    plt.plot(VV, ID, label=f'VG = {VG}V')
+
+plt.xlabel("Drain Voltage [V]")
+plt.ylabel("Current [A]")
+plt.legend()
+plt.show()
+\end{lstlisting}
+
+\section*{Appendix: problem3.py}
+\label{appendix:thermoelectric}
+
+\begin{lstlisting}[
+    language=Python,
+    caption={Thermoelectric transport simulation with varying channel energy levels.},
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!3}
+]
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Constants and Parameters
+hbar, q = 1.054e-34, 1.602e-19
+kBT1, kBT2 = 0.025, 0.026  # Source and Drain thermal energies [eV]
+mu = 0.0                   # Equilibrium Fermi level
+gamma_1 = gamma_2 = 0.005  # Broadening [eV]
+gamma = gamma_1 + gamma_2
+
+# Grids
+E = np.linspace(-1, 1, 501)
+cal_E_sweep = np.linspace(-0.25, 0.25, 101)
+dE = E[1] - E[0]
+
+# Output Arrays
+N = np.zeros_like(cal_E_sweep)
+I = np.zeros_like(cal_E_sweep)
+
+# Fermi functions
+f1 = 1 / (1 + np.exp((E - mu) / kBT1))
+f2 = 1 / (1 + np.exp((E - mu) / kBT2))
+
+for i, eps in enumerate(cal_E_sweep):
+    # Lorentzian Density of States
+    D = (gamma / (2 * np.pi)) / ((E - eps)**2 + (gamma / 2)**2)
+    D /= (np.sum(D) * dE) # Normalization
+
+    # Calculate Occupancy (N) and Current (I)
+    N[i] = dE * np.sum((gamma_1 * f1 + gamma_2 * f2) * D) / gamma
+    I[i] = q * (q / hbar) * (gamma_1 * gamma_2 / gamma) * dE * np.sum((f1 - f2) * D)
+
+# Plotting code follows (omitted for brevity)
+\end{lstlisting}
+
+\section*{Appendix: problem4b.py}
+\label{appendix:calc_4b}
+
+\begin{lstlisting}[
+    language=Python,
+    caption={Extraction of terminal voltages from Fermi-Dirac step locations.},
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!3}
+]
+import numpy as np
+
+# Given parameters
+U = -0.25      # [eV] Self-consistent potential
+mu_eq = 0.0    # [eV] Equilibrium Fermi level
+
+# Step locations identified from the plots
+step1 = -0.25  # Energy at which f1 steps
+step2 = 0.25   # Energy at which f2 steps
+
+# Case (i): Plots show f(E + U)
+# Step occurs when (E + U) = mu_i
+mu1_i = step1 + mu_eq
+mu2_i = step2 + mu_eq
+Vs_i, Vd_i = -mu1_i, -mu2_i
+
+print(f"Case (i) f(E+U): Vs = {Vs_i:.2f} V, Vd = {Vd_i:.2f} V")
+
+# Case (ii): Plots show f(E)
+# Step occurs when E = mu_i - U
+mu1_ii = step1 + U + mu_eq
+mu2_ii = step2 + U + mu_eq
+Vs_ii, Vd_ii = -mu1_ii, -mu2_ii
+
+print(f"Case (ii) f(E): Vs = {Vs_ii:.2f} V, Vd = {Vd_ii:.2f} V")
+\end{lstlisting}
+
+\section*{Appendix: problem4c.py}
+\label{appendix:mosfet_window}
+
+\begin{lstlisting}[
+    language=Python,
+    caption={Calculation of the energy window and Fermi difference at absolute zero.},
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!3}
+]
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Bias and Potential Parameters
+U = -0.2        # Self-consistent potential [eV]
+Vs, Vd = 0.0, 0.4 # Terminal voltages [V]
+mu_eq = 0.0     # Equilibrium Fermi level [eV]
+
+# Energy Grid
+E = np.linspace(-0.6, 0.6, 1000)
+dE = E[1] - E[0]
+
+# Electrochemical Potentials
+mu1 = mu_eq - Vs
+mu2 = mu_eq - Vd
+
+# Fermi Step Locations (shifted by U)
+# Argument is (E + U - mu), so step is at E = mu - U
+step1 = mu1 - U
+step2 = mu2 - U
+
+# Fermi Functions at T = 0K (Heaviside steps)
+f1 = np.where(E < step1, 1, 0)
+f2 = np.where(E < step2, 1, 0)
+
+# Step-function Density of States
+D = np.where(E >= -0.1, 1000, 0)
+
+# Difference in agenda (Fermi Window)
+agenda_diff = f1 - f2
+
+# Plotting the Energy Window
+plt.figure(figsize=(10, 8))
+plt.subplot(2, 2, 4)
+plt.plot(agenda_diff, E, "g-", label="f1 - f2")
+plt.xlabel("f1 - f2")
+plt.ylabel("Energy (eV)")
+plt.title("Current Carrying Window")
+
+# Shading the integration region (Agenda difference AND available states)
+shade = (agenda_diff > 0.5) & (E >= -0.1)
+plt.fill_betweenx(E, 0, agenda_diff, where=shade, color="g", alpha=0.2)
+plt.grid(True)
+plt.show()
+\end{lstlisting}
 \end{document}
