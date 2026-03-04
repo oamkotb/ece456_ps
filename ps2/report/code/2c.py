@@ -33,7 +33,15 @@ print(f"Eigenvalue 1: {evals[1 - 1]} eV")
 print(f"Eigenvalue 2: {evals[2 - 1]} eV")
 
 plt.figure()
-plt.plot(r, pd1, "k-", label="Eiganvalue 1")
+plt.title("Eigenvalue 1")
+plt.plot(r, pd1, "k-", label="Numerical")
+plt.plot(
+    r,
+    a * (2 * r / 0.0529e-9 ** (3 / 2) * np.exp(-r / 0.0529e-9)) ** 2,
+    "o",
+    markerfacecolor="none",
+    label="Analytical",
+)
 plt.xlabel("Grid Position [m]")
 plt.ylabel("Probability Density")
 plt.legend()
@@ -41,7 +49,8 @@ plt.grid()
 plt.show()
 
 plt.figure()
-plt.plot(r, pd2, "r-", label="Eigenvalue 2")
+plt.title("Eigenvalue 2")
+plt.plot(r, pd2, "r-", label="Numerical")
 plt.xlabel("Grid Position [m]")
 plt.ylabel("Probability Density")
 plt.legend()
@@ -49,18 +58,3 @@ plt.grid()
 plt.show()
 
 E = (hbar * np.pi * n) ** 2 / (2 * m * L**2) / q
-# plt.figure()
-# plt.plot(n, E, "g-", label="Analytical")
-# plt.plot(n, evals, "m-", label="Numerical")
-# plt.plot(
-#     n,
-#     2 * t0 * (1 - np.cos(n * np.pi * a / L)),
-#     "o",
-#     markerfacecolor="none",
-#     label="Discrete",
-# )
-# plt.xlabel("Eigenvalue Number")
-# plt.ylabel("Energy [eV]")
-# plt.legend()
-# plt.grid()
-# plt.show()

@@ -24,6 +24,7 @@
 \pagestyle{fancy}
 
 \newcommand{\ham}{\hat{\mathcal{H}}}
+\newcommand{\FT}{\mathcal{F}}
 
 \begin{document}
 
@@ -186,8 +187,25 @@ Dividing both sides by $\phi_{\ell}$ and substituting $k = \frac{n\pi}{L}$:
 \subsection{Periodic Boundary Conditions}
 
 % (i)
-\subsubsection{TITLE HERE}
-The code in \verb|1d.py| is a modified version of \verb|1a.py| changed to implement periodic boundary conditions. Running \verb|1d.py| to get the eigenvalue numbers 4 and 5 produced the output:
+\subsubsection{Plotting the Particle in a Ring}
+The code in \verb|1d.py| is a modified version of \verb|1a.py| changed to implement periodic boundary conditions. The modified code produced the probability density and the numerical eigenvalue plots in Figures \ref{fig:1d_probdensity} and \ref{fig:1d_numerical}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{imgs/1d_probdensity.png}
+    \caption{Position-probability densities from the numerical wave functions $\{\phi\}$ for eigenvalue numbers $1$ and $50$.}
+    \label{fig:1d_probdensity}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{imgs/1d_numerical.png}
+    \caption{The 100 eigenvalues that resulted from the numerical solution.}
+    \label{fig:1d_numerical}
+\end{figure}
+
+\noindent Running \verb|1d.py| to get the eigenvalue numbers 4 and 5 produced the output:
+
 % (ii)
 \begin{verbatim}
 Eigenvalue 4: 0.060023108288934125 eV
@@ -290,7 +308,7 @@ where $n$ is analytical eigenvalue number. The mapping between the numerical eig
 \section{Radial Equation for the Hydrogen Atom}
 The radial part of the solution of the Schrödinger equation for the hydrogen atom can be written in terms of a function $f(r)$ where $|f(r)|^2 \dd{r}$ represents the probability of finding the electron in the volume between $r$ and $r + \dd{r}$, where the nucleus is at the origin $r = 0$. Given that $f(r)$ is govered by the radial Schrödinger equation,
 \begin{equation}\label{eq:radial_schro}
-    \left[ \frac{-\hbar^2}{2m} \frac{d^2}{dr^2} - \frac{q^2}{4\pi\epsilon_0 r} + \frac{l_o(l_o + 1)\hbar^2}{2mr^2} \right] f(r) = Ef(r)
+    \left[ \frac{-\hbar^2}{2m} \frac{d^2}{dr^2} - \frac{q^2}{4\pi\epsilon_0 r} + \frac{l_o(l_o + 1)\hbar^2}{2mr^2} \right] f(r) = ef(r)
 \end{equation}
 where $\epsilon_0 = 8.854 \times 10^{-12}\,\unit{\farad\per\meter}$.
 
@@ -324,15 +342,113 @@ where $U_l$ and $t_0$ are defined as
     t_0 = \frac{\hbar^2}{2m(\Delta r)^2}
 \end{equation}
 
-% 2d
-\noindent The code in \verb|1a.py| was modified to what is seen in \verb|2c.py|. \verb|2c.py| was used to produce the plots for the first two eigenvectors, corresponding to the 1s and 2s energy states, as seen in Figures [ADD REF HERE].
+% 2c
+\subsection{Solving the Radial Equation}
+\noindent The code in \verb|1a.py| was modified to what is seen in \verb|2c.py|. \verb|2c.py| was used to produce the plots for the first two eigenvectors, corresponding to the 1s and 2s energy states, as seen in Figures \ref{fig:2f_eigenvalue1} and \ref{fig:2f_eigenvalue2}. \\
 
+% 2d
+\noindent \verb|1c.py| also produced the following output for the numerical value of the eigenvalue (or eigenenergy) for the 1st level
 \begin{verbatim}
 Eigenvalue 1: -13.497781923462465 eV
-Eigenvalue 2: -3.396072886508772 eV
 \end{verbatim}
 
-% 2d
+% 2e
+\subsection{Finding the Analytical Result}
+\noindent The analytical expression for the 1s eigenfunction is
+\begin{equation}\label{eq:2e_analytical}
+    f(r) = \frac{2r}{a_0^{3/2}} e^{-r/a_0}
+\end{equation}
+where $a_0 = 4\pi\epsilon_0\hbar^2/mq^2 = \qty{0.0529}{\nano\meter}$ is known as the \textit{Bohr radius}.\\
+
+\noindent Given the radial Schrödinger equation for $l_o = 0$
+\[
+    -\frac{\hbar^2}{2m} \frac{d^2f}{dr^2} - \frac{q^2}{4\pi\epsilon_0 r} f(r) = E f(r)
+\]
+\noindent And the 1s eigenfunction
+\[
+    f(r) = C r e^{-r/a_0} \quad \text{where} \quad a_0 = \frac{4\pi\epsilon_0\hbar^2}{mq^2}
+\]
+\noindent Taking the first and second derivatives of $f(r)$
+\[
+    \frac{df}{dr} = C e^{-r/a_0} \left( 1 - \frac{r}{a_0} \right)
+\]
+\[
+    \frac{d^2f}{dr^2} = C e^{-r/a_0} \left( \frac{r}{a_0^2} - \frac{2}{a_0} \right)
+\]
+\noindent Substituting $\frac{d^2f}{dr^2}$ back into the Schrödinger equation
+\[
+    -\frac{\hbar^2}{2m} \left( \frac{r}{a_0^2} - \frac{2}{a_0} \right) - \frac{q^2}{4\pi\epsilon_0 r} (r) = E(r)
+\]
+\noindent Using the definition of $a_0$, the $1/r$ terms cancel, leaving the constant energy
+\[
+\boxed{
+    E = -\frac{\hbar^2}{2ma_0^2} = \qty{-13.6}{\eV}
+}
+\]
+
+\noindent The analytical result is close to the numerical, this confirms that the ground-state energy of Hydrogen is close to $\qty{-13.5}{\eV}$
+
+% 2f
+\subsection{Comparison with the Analytical Result}
+\noindent Superimposing a plot of $a|f(r)|^2$, with $f(r)$ given by the analytical expression (\ref{eq:2e_analytical}), over the numerical plot produces the plot in Figure \ref{fig:2f_eigenvalue1}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{imgs/2f_eigenvalue1.png}
+    \caption{Position-probability densities from the numerical wave functions $\{\phi\}$ for eigenvalue number $1$ with the analytical result superimposed above it.}
+    \label{fig:2f_eigenvalue1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{imgs/2f_eigenvalue2.png}
+    \caption{Position-probability densities from the numerical wave functions $\{\phi\}$ for eigenvalue number $2$.}
+    \label{fig:2f_eigenvalue2}
+\end{figure}
+
+\noindent By observing Figure \ref{fig:2f_eigenvalue1}, it is clear that the analytical result closely matches the numerical. This is expected as if the eigenenergies ($E$) are approximately the same, the correspodning eigenfunctions ($f(r)$) must also be approximately the same.
+
+\section{Momentum for the Particle in a Box}
+%3a
+\subsection{Change of Variables}
+The ground-state ($n = 1$) wave function can be written as
+\begin{equation}
+	\Phi(x) = \sqrt{\frac{2}{L}} sin\left( \frac{\pi}{L} x \right)
+\end{equation}
+Implementing the change of variables $x' = x - L/2$ produces the ground-state wave function on the $x'$-axis:
+\begin{align*}
+    \Phi(x')
+    &= \sqrt{\frac{2}{L}}\sin\left( \frac{\pi}{L}\left(x' + \frac{L}{2} \right)\right) \\
+    &= \sqrt{\frac{2}{L}}\sin\left( \frac{\pi}{L}x' + \frac{\pi}{2} \right) \\
+\end{align*}
+\begin{equation}\label{eq:3a_groundstate}
+\boxed{
+    \Phi(x') = \sqrt{\frac{2}{L}}\cos\left( \frac{\pi x'}{L} \right) \\
+}
+\end{equation}
+
+%3b
+% (i)
+\subsection{Solving for the Momentum}
+\subsubsection{Fourier-Transform of the Wave Function}
+The wave function for the ground-state (\ref{eq:3a_groundstate}) should really be written as
+\begin{equation}
+    \Phi(x') = \sqrt{\frac{2}{L}}\cos\left( \frac{\pi x'}{L} \right) \times \text{rect} \left( \frac{x'}{L} \right) \\
+\end{equation}
+Now taking the Fourier-transform of the ground-state wave function produces
+\begin{align*}
+    \FT \left[\phi(x')\right] &= \FT \left[\sqrt{\frac{2}{L}}\cos\left( \frac{\pi x'}{L} \right) \cdot \text{rect} \left( \frac{x'}{L} \right) \right] \\
+    A(k') &= \sqrt{\frac{2}{L}} \times \FT \left[ \cos\left( \frac{\pi x'}{L} \right) \cdot \text{rect} \left( \frac{x'}{L} \right) \right] \\
+A(k') &= \sqrt{\frac{2}{L}} \mathcal{F} \left[ \cos(k_1 x') \text{rect} \left( \frac{x'}{L} \right) \right] \quad \text{where } k_1 = \frac{\pi}{L} \\
+&= \sqrt{\frac{2}{L}} \cdot \frac{1}{2} \left[ \mathcal{F}\left\{ \text{rect}\left(\frac{x'}{L}\right) \right\}_{k' \to (k'+k_1)} + \mathcal{F}\left\{ \text{rect}\left(\frac{x'}{L}\right) \right\}_{k' \to (k'-k_1)} \right] \\
+\intertext{Using } \mathcal{F}\left[\text{rect}\left(\frac{t}{\tau}\right)\right] = \frac{\tau}{\sqrt{2\pi}}\mathrm{sinc}\left(\frac{\omega\tau}{2\pi}\right): \\
+A(k') &= \sqrt{\frac{2}{L}} \cdot \frac{1}{2} \left[ \frac{L}{\sqrt{2\pi}} \mathrm{sinc}\left( \frac{L(k' + k_1)}{2\pi} \right) + \frac{L}{\sqrt{2\pi}} \mathrm{sinc}\left( \frac{L(k' - k_1)}{2\pi} \right) \right] \\
+&= \frac{1}{2} \left( \sqrt{\frac{2}{L}} \cdot \frac{L}{\sqrt{2\pi}} \right) \left\{ \mathrm{sinc}\left[ \frac{L}{2\pi}(k' + k_1) \right] + \mathrm{sinc}\left[ \frac{L}{2\pi}(k' - k_1) \right] \right\} \\
+&= \frac{1}{2} \sqrt{\frac{2L^2}{2\pi L}} \left\{ \mathrm{sinc}\left[ \frac{L}{2\pi}(k' + k_1) \right] + \mathrm{sinc}\left[ \frac{L}{2\pi}(k' - k_1) \right] \right\} \\
+A(k') &= \frac{1}{2} \sqrt{\frac{L}{\pi}} \left\{ \mathrm{sinc}\left[ \frac{L}{2\pi}(k' + k_1) \right] + \mathrm{sinc}\left[ \frac{L}{2\pi}(k' - k_1) \right] \right\}
+\end{align*}
+\subsubsection{Wave Function in Momentum Space}
+
+
 
 \section{Appendix}
 
@@ -353,7 +469,7 @@ Eigenvalue 2: -3.396072886508772 eV
 \end{listing}
 
 \begin{listing}[H]
-    \caption{Code in 1d.py used to generate Figures.}
+    \caption{Code in 1d.py used to generate Figures \ref{fig:1d_probdensity} and \ref{fig:1d_numerical}.}
     \inputminted[
         bgcolor=monokaibg,
         frame=leftline,        % Adds a subtle vertical bar on the left
@@ -365,5 +481,20 @@ Eigenvalue 2: -3.396072886508772 eV
         fontsize=\footnotesize,
         breaklines,            % Wraps long lines automatically
     ]{python}{code/1d.py}
+\end{listing}
+
+\begin{listing}[H]
+    \caption{Code in 2c.py used to generate Figures \ref{fig:2f_eigenvalue1} and \ref{fig:2f_eigenvalue2}.}
+    \inputminted[
+        bgcolor=monokaibg,
+        frame=leftline,        % Adds a subtle vertical bar on the left
+        rulecolor=linegray,
+        framesep=3mm,
+        baselinestretch=1.1,
+        linenos,
+        numbersep=5pt,
+        fontsize=\footnotesize,
+        breaklines,            % Wraps long lines automatically
+    ]{python}{code/2c.py}
 \end{listing}
 \end{document}
